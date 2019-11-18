@@ -1,0 +1,37 @@
+<script>
+// Write a function countBs that takes a string as its only argument and returns a number that indicates how many uppercase “B” characters there are in the string.
+function countBs(givenString){
+let count = 0;
+ for(let i = 0; i < givenString.length; i++){
+    if(givenString[i] == "B"){
+     count++;
+   }
+ }
+  return count;
+}
+// write a function called countChar that behaves like countBs, except it takes a second argument that indicates the character that is to be counted (rather than counting only uppercase “B” characters).
+function countChar(givenString, characterToCount){
+    let count = 0;
+  for(let i = 0; i < givenString.length; i++){
+    if(givenString[i] == characterToCount){
+     count++;
+   }
+  }
+  return count;
+}
+console.log(countBs("BBC"));
+// → 2
+console.log(countChar("kakkerlak", "k"));
+// → 4
+
+//or new fashioned way:
+
+var countBs = function(str) {
+    return str.match(/B/g).length;
+};
+
+var countChar = function(str, character) {
+    var matchExp = new RegExp(character, 'g');
+    return str.match(matchExp).length;
+};
+</script>
