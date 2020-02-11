@@ -1,0 +1,28 @@
+<script>
+    //The first, reverseArray, takes an array as argument and produces a new array that has the same elements in the inverse order. 
+    //The second, reverseArrayInPlace, does what the reverse method does: it modifies the array given as argument by reversing its elements.
+    // Neither may use the standard reverse method.
+function reversArray (myArray){
+    let resultArray = [];
+    for(let a of myArray){
+        resultArray.unshift(a);
+    }
+    return resultArray;
+}
+
+console.log(reverseArray(["A", "B", "C"]));
+// → ["C", "B", "A"];
+function reverseArrayInPlace(myArray){
+  let result = [];
+  for(i = 0; i < Math.floor(myArray.length/2); i++){
+    let swap = myArray[i];
+    myArray[i] = myArray[myArray.length-i-1];
+    myArray[myArray.length-i-1] = swap;
+  }
+  return myArray;
+}
+let arrayValue = [1, 2, 3, 4, 5];
+reverseArrayInPlace(arrayValue);
+console.log(arrayValue);
+// → [5, 4, 3, 2, 1]
+</script>
