@@ -1,0 +1,79 @@
+<script>
+    //Write a function arrayToList that builds up a list structure like the one shown when given [1, 2, 3] as argument. 
+    //Also write a listToArray function that produces an array from a list. Then add a helper function prepend, 
+    //which takes an element and a list and creates a new list that adds the element to the front of the input list, 
+    //and nth, which takes a list and a number and returns the element at the given position in the list 
+    //(with zero referring to the first element) or undefined when there is no such element.
+function arrayToList(array) {
+  let result = {};
+  if (Array.isArray(array)) {
+    let list = null;
+    array = array.reverse();
+    for (let item of array) {
+      list = {
+        value: item,
+        rest: list
+      };
+    }
+    result = list;
+  }
+  return result;
+}
+
+function listToArray(list) {
+  let result = [];
+  if (typeof list === 'undefined' || list.value === undefined || list.rest === undefined) {
+    return result;
+  } else {
+    for (let node = list; node; node = node.rest) {
+      if (node.hasOwnProperty('value')) {
+        result.push(node.value);
+      }
+    }
+  }
+  return result;
+}
+function prepend(element, list) {
+  return {
+    value: element,
+    rest: list
+  };
+}
+
+function nth(list, number) {
+  return listToArray(list)[number];
+}
+
+function nthRecursive(list, number) {
+  if (number === 0) {
+    return list.value;
+  } else if (list.rest === null) {
+    return undefined;
+  } else {
+    return nthRecursive(list.rest, number-1);
+  }
+}
+
+console.log('\nWith Hints:');
+console.log(arrayToList());
+console.log(arrayToList([10, 20]));
+// → {value: 10, rest: {value: 20, rest: null}}
+console.log(arrayToList([4, 3, 2, 1]));
+// → {value: 4, rest: {value: 3, rest: {value: 2, rest: {value: 1, rest: null}}}}
+console.log(listToArray());
+// → []
+console.log(listToArray(arrayToList([10, 20, 30])));
+// → [10, 20, 30]
+console.log(listToArray({value: 10, rest: {xxx: 20, yyy: null}}));
+// → [10]
+console.log(listToArray({value: 10, rest: {value: 20, yyy: null}}));
+// → [10, 20]
+console.log(listToArray({value: 10, rest: {xxx: 20, rest: null}}));
+// → [10]
+console.log(nth(arrayToList([10, 20, 30]), 1));
+// → 20
+console.log(nth(arrayToList([10, 20, 30]), 3));
+// → undefined
+console.log(nth(arrayToList([10, 20, 30]), -2));
+// → undefined
+</script>
